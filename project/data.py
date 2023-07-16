@@ -2,7 +2,6 @@ import time
 import yfinance as yf
 
 
-def get_current_price(symbol: str, seconds: int):
+def get_current_price(symbol: str):
     t = yf.Ticker(symbol)
-    print(t.fast_info.get("lastPrice"))
-    time.sleep(seconds)
+    return [str(time.time()), t.fast_info.get("lastPrice")]
