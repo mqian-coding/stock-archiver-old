@@ -21,7 +21,6 @@ def start_archiving(symbol: str, frequency: int):
                 ts = time.time()
                 row = [ts, get_current_price(symbol)]
                 writer.writerow(row)
-                print(f"{symbol}: {row}")
                 file.flush()
                 time.sleep(frequency)
 
