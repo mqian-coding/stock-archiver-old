@@ -1,22 +1,20 @@
-import csv
 import data
-import time
+import threading
 
-TICKER_SYMBOL = "ATVI"
+
+TICKER_SYMBOLS = ["GOOG", "AAPL", "MSFT"]
 FREQUENCY_IN_SECONDS = 1
 
 
 def start():
-    log_prices(TICKER_SYMBOL, FREQUENCY_IN_SECONDS)
+    # Background Workers to log prices
+    archive_workers = []
+    for s in TICKER_SYMBOLS:
+        w = threading.Thread(target=data.start_archiving, args=(s, FREQUENCY_IN_SECONDS,)).start()
+        archive_workers.append(w)
 
 
-def log_prices(symbol: str, frequency: int):
-    with open(f"./test/price_data/{symbol}_{str(time.time())}.csv", 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["timestamp", "price"])
-        while True:
-            row = data.get_current_price(TICKER_SYMBOL)
-            print(f"CURRENT: {row}")
-            writer.writerow(row)
-            file.flush()
-            time.sleep(frequency)
+
+
+
+
