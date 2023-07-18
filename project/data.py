@@ -8,7 +8,9 @@ import yfinance as yf
 def get_current_price(symbol: str):
     # TODO: Error handling + Context Deadline
     t = yf.Ticker(symbol)
-    return t.fast_info.get("lastPrice")
+    if t and t.fast_info:
+        return t.fast_info.get("lastPrice", None)
+    return None
 
 
 def start_archiving(symbol: str, frequency: int):
