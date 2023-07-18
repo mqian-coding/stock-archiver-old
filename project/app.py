@@ -2,14 +2,11 @@ import data
 import threading
 from serve.server import server
 
-TICKER_SYMBOLS = ["GOOG", "AAPL", "MSFT"]
+TICKER_SYMBOLS = ["GOOG", "AAPL", "MSFT", "CSHI",]
 FREQUENCY_IN_SECONDS = 1
 
 
-
-
 def start():
-
     # Background Workers to log prices
     print("START: Archiving prices...")
     archive_workers = []
