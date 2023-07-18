@@ -10,8 +10,8 @@ ERR_NO_PRICE_DATA = "error: no price data"
 def get_current_price(symbol: str):
     # TODO: Error handling + Context Deadline
     t = yf.Ticker(symbol)
-    if t and t.fast_info:
-        return t.fast_info.get("lastPrice", ERR_NO_PRICE_DATA)
+    if t and t.fast_info and "lastPrice" in t.fast_info:
+        return t.fast_info["lastPrice"]
     return ERR_NO_PRICE_DATA
 
 
