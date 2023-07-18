@@ -4,13 +4,15 @@ from datetime import datetime as dt
 import time
 import yfinance as yf
 
+ERR_NO_PRICE_DATA = "error: no price data"
+
 
 def get_current_price(symbol: str):
     # TODO: Error handling + Context Deadline
     t = yf.Ticker(symbol)
-    if t and t.fast_info:
-        return t.fast_info.get("lastPrice", None)
-    return None
+    if t and t.fast_info and "lastPrice" in t.fast_info:
+        return t.fast_info.get("lastPrice")
+    return ERR_NO_PRICE_DATA
 
 
 def start_archiving(symbol: str, frequency: int):
